@@ -44,15 +44,8 @@ INSTALLED_APPS = [
     'notifications',
     'sslserver',
     'social_media_api',
-    'django_filters', 
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework',
-    'rest_framework.authtoken',
+    'django_filters',
 ]
-
-
-AUTH_USER_MODEL = 'accounts.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
