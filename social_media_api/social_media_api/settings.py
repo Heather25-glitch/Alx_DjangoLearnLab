@@ -44,8 +44,11 @@ INSTALLED_APPS = [
     'notifications',
     'sslserver',
     'social_media_api',
-    'django_filters',
+    'django_filters', 
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
+
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
