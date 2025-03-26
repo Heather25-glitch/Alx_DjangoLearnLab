@@ -82,9 +82,9 @@ class LikePostView(generics.GenericAPIView):
 
         if created:
             Notification.objects.create(recipient=post.author, actor=request.user, verb='liked', target=post)
-            return Response({'message': 'Post liked.'}, status=status.HTTP_201_CREATE)
+            return Response({'message': 'Post liked.'}, status=status.HTTP_201_CREATED)
         else:
-            return Response({'message': 'You already liked this post.'}, status=status.HTTP_404_BAD_REQUEST)
+            return Response({'message': 'You already liked this post.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UnlikePostView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
