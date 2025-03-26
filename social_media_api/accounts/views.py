@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from .models import CustomUser
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer, UserSerializer  # ✅ Import UserSerializer
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
@@ -23,12 +23,12 @@ class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.validated_data['user']
+            user = serializer.validated_data['user']  # ✅ Corrected way to get the user
             token, created = Token.objects.get_or_create(user=user)
             return Response({"token": token.key})
         return Response(serializer.errors, status=400)
 
 class UserProfileView(APIView):
     def get(self, request):
-        serializer = UserSerializer(request.user)
+        serializer = UserSerializer(request.user)  # ✅ This should now work fine
         return Response(serializer.data)
