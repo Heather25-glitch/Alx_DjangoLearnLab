@@ -44,6 +44,54 @@ INSTALLED_APPS = [
     "social_media_api",
 ]
 
+MIDDLE
+
+import os
+from pathlib import Path
+import dj_database_url
+
+# BASE DIRECTORY
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# SECURITY SETTINGS
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "your-default-secret-key")  
+DEBUG = False  # Ensure DEBUG is set to False in production
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+
+# DATABASE CONFIGURATION
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", ""),
+        conn_max_age=600,
+    )
+}
+
+# Ensure DATABASE CREDENTIALS are explicitly defined
+DATABASES["default"].update(
+    {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),  # Ensures USER is set
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),  # Ensures PORT is set
+    }
+)
+
+# APPLICATION DEFINITION
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "corsheaders",
+    "social_media_api",
+]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
