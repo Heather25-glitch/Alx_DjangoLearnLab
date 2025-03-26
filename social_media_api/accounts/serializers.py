@@ -28,4 +28,4 @@ class LoginSerializer(serializers.Serializer):
             if not user:
                 raise serializers.ValidationError("Invalid username or password.")
             data['user'] = user
-            token, created = Token.objects.get_or_create(user=user
+            token, created = Token.objects.get_or_create(user=user)
